@@ -51,7 +51,7 @@
                            <td>$curr_row[deadline]</td>
                            <td>
                                <a class='btn btn-primary btn-sm' href='/crud/edit.php?id=$curr_row[id]'>Edit</a>
-                               <a class='btn btn-danger btn-sm' href='/crud/delete.php?=$curr_row[id]'>Delete</a>
+                               <a class='btn btn-danger btn-sm' href='/crud/delete.php?id=$curr_row[id]'>Delete</a>
                            </td>
                        </tr>
                     ";
