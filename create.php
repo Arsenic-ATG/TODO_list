@@ -6,18 +6,14 @@ $deadline = "";
 $error_msg = "";
 $sucess_msg = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $task = $_POST["task"];
     $deadline = $_POST["deadline"];
 
-    if (empty($name) || empty($task))
-    {
+    if (empty($name) || empty($task)) {
         $error_msg = "please fill all the required filed";
-    }
-    else
-    {
+    } else {
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -27,26 +23,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $connection = new mysqli($servername, $username, $password, $database);
 
         if ($connection->connect_error) {
-            $error_msg = "failed to connect to database" . $connection->connect_error;
+            $error_msg =
+                "failed to connect to database" . $connection->connect_error;
         }
 
-        $deadline = empty($deadline)?"NULL":"'$deadline'";
+        // transform deadline to correct DATETIME type value
+        $deadline = empty($deadline) ? "NULL" : "'$deadline'";
 
         // insert information into the database
-        $sql_query = "INSERT INTO tasks (name,task,deadline)".
-                     "VALUES".
-                     "('$name', '$task', $deadline);";
+        $sql_query =
+            "INSERT INTO tasks (name,task,deadline)" .
+            "VALUES" .
+            "('$name', '$task', $deadline);";
         $result = $connection->query($sql_query);
 
         if (!$result) {
             $error_msg = "Invalid query" . $connection->error;
-        }
-        else{
+        } else {
             $name = "";
             $task = "";
             $deadline = "";
 
-            $sucess_msg = "task added";
+            $sucess_msg = "Task added successfully";
         }
     }
 }
@@ -64,42 +62,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <div class="container my-5">
             <h2>Create new task</h2>
 
-            <?php
-            if (!empty($error_msg)){
+            <?php if (!empty($error_msg)) {
                 echo "
                   <div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">
                     <strong>$error_msg</strong>
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
                   </div>
                 ";
-            }
-            else if (!empty($sucess_msg)){
+            } elseif (!empty($sucess_msg)) {
                 echo "
                   <div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
                     <strong>$sucess_msg</strong>
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
                   </div>
                 ";
-            }
-            ?>
+            } ?>
 
             <form method="post">
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Name</label>
                     <div class="col sm-6">
-                        <input type="text" name="name" value="<?php echo $name ?>" class="form-control">
+                        <input type="text" name="name" value="<?php echo $name; ?>" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Task</label>
                     <div class="col sm-6">
-                        <input type="text" name="task" value="<?php echo $task ?>" class="form-control">
+                        <input type="text" name="task" value="<?php echo $task; ?>" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Deadline (optional)</label>
                     <div class="col sm-6">
-                        <input type="text" name="deadline" value="<?php echo $deadline ?>" class="form-control">
+                        <input type="text" name="deadline" value="<?php echo $deadline; ?>" class="form-control">
                     </div>
                 </div>
 

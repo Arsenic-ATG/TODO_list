@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET["id"])){
+if (isset($_GET["id"])) {
     $id = $_GET["id"];
     echo $id;
 
@@ -15,6 +15,6 @@ if (isset($_GET["id"])){
     $connection->query($sql_query);
 }
 
-header ("LOCATION: ./index.php");
-exit;
+header("LOCATION: ./index.php");
+exit();
 ?>

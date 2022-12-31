@@ -28,10 +28,18 @@
                 $database = "todo_list";
 
                 // Connect to the sql database
-                $connection = new mysqli($servername, $username, $password, $database);
+                $connection = new mysqli(
+                    $servername,
+                    $username,
+                    $password,
+                    $database
+                );
 
                 if ($connection->connect_error) {
-                    die("failed to connect to database" . $connection->connect_error);
+                    die(
+                        "failed to connect to database" .
+                        $connection->connect_error
+                    );
                 }
 
                 // Read the entire database
@@ -56,8 +64,6 @@
                        </tr>
                     ";
                 }
-
-
                 ?>
 
             </tbody>
